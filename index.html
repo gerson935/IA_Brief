@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA & Alucinación — Guía para Carreras de Negocios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d4a0;
+    --rust: #b84c2c;
+    --blue-deep: #1a2e4a;
+    --blue-mid: #2d4f7a;
+    --green-teal: #1e5f5a;
+    --green-light: #d4ede8;
+    --purple: #4a2d6b;
+    --purple-light: #e8d4f0;
+    --orange: #c45c28;
+    --orange-light: #f5ddd0;
+    --card-bg: #ffffff;
+    --border: rgba(13,13,13,0.12);
+    --shadow: 0 4px 30px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 60px rgba(0,0,0,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    font-size: 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--blue-deep);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(45,79,122,0.4) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-badge {
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s 0.1s ease both;
+    max-width: 900px;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    max-width: 620px;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s 0.2s ease both;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s 0.3s ease both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-meta-item {
+    text-align: center;
+  }
+
+  .hero-meta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-meta-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,46,74,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 2rem;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.55);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 1.1rem 1.2rem;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-btn:hover { color: white; }
+
+  .nav-btn.active {
+    color: var(--gold);
+  }
+
+  .nav-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.2rem;
+    right: 1.2rem;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .section.active { display: block; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--blue-deep);
+    max-width: 700px;
+  }
+
+  .section-lead {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    max-width: 700px;
+    margin-top: 1.5rem;
+    font-weight: 300;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* ── ALERT BOX ── */
+  .alert {
+    background: linear-gradient(135deg, #fff5f5, #fff0f0);
+    border-left: 4px solid var(--rust);
+    border-radius: 0 12px 12px 0;
+    padding: 2rem 2.5rem;
+    margin: 2rem 0;
+  }
+
+  .alert-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--rust);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--blue-deep);
+    color: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin: 2rem 0;
+  }
+
+  .info-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .info-box p {
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+  }
+
+  /* ── RISK METER ── */
+  .risk-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+
+  .risk-item {
+    border-radius: 12px;
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .risk-item.high { background: #fff5f5; border: 1.5px solid #f5c6c6; }
+  .risk-item.medium { background: #fffbf0; border: 1.5px solid #f5e4a0; }
+  .risk-item.low { background: #f0fff8; border: 1.5px solid #a0e8c8; }
+
+  .risk-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .risk-item.high .risk-label { color: #b83030; }
+  .risk-item.medium .risk-label { color: #8a6800; }
+  .risk-item.low .risk-label { color: #1a7a4a; }
+
+  .risk-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .risk-item p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  /* ── PREVENTION STEPS ── */
+  .steps {
+    display: grid;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .step {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+
+  .step:hover { transform: translateX(6px); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+    min-width: 3rem;
+    text-align: center;
+  }
+
+  .step-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 0.6rem;
+  }
+
+  .step-content p {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  .step-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .step-tag.critical { background: #ffe8e8; color: #c03030; }
+  .step-tag.structural { background: #e8f0ff; color: #2d4faa; }
+  .step-tag.operational { background: #e8fff5; color: #1a7a4a; }
+  .step-tag.governance { background: #fff5e8; color: #8a5500; }
+
+  /* ── EXAMPLES (Section 3) ── */
+  .career-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .career-tab {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 0.65rem 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+  }
+
+  .career-tab:hover { border-color: var(--gold); color: var(--ink); }
+
+  .career-tab.active {
+    background: var(--blue-deep);
+    border-color: var(--blue-deep);
+    color: white;
+  }
+
+  .example-card { display: none; }
+  .example-card.active { display: block; }
+
+  .example-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .example-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .example-meta h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 0.3rem;
+  }
+
+  .example-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .example-body p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .example-panel {
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .example-panel.use { background: var(--green-light); border: 1px solid #b0ddd8; }
+  .example-panel.prevention { background: #fff5e8; border: 1px solid #f0d8a0; }
+
+  .example-panel h5 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #666;
+  }
+
+  .example-panel ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .example-panel ul li {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #444;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .example-panel ul li::before {
+    content: '→';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .result-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .result-item {
+    background: var(--blue-deep);
+    color: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .result-item strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .result-item span { font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+
+  /* ── GLOSSARY ── */
+  .glossary {
+    background: #f8f6f0;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+    border: 1px solid #e8e0d0;
+  }
+
+  .glossary h5 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .glossary-item {
+    background: white;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0d8c8;
+  }
+
+  .glossary-item dt {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--blue-mid);
+    margin-bottom: 0.3rem;
+  }
+
+  .glossary-item dd {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #666;
+    font-style: normal;
+  }
+
+  /* ── SECTION 4 — FUTURE ── */
+  .future-banner {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, #0d1f38 100%);
+    border-radius: 20px;
+    padding: 3.5rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .future-banner::after {
+    content: '⚛';
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8rem;
+    opacity: 0.06;
+  }
+
+  .future-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+  }
+
+  .future-banner p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    max-width: 700px;
+    font-weight: 300;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 4.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--blue-mid), var(--purple));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1.5rem 0;
+    position: relative;
+  }
+
+  .timeline-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    background: var(--blue-deep);
+    width: 5rem;
+    height: 2rem;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    border: 2px solid var(--gold);
+  }
+
+  .timeline-content {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    flex: 1;
+  }
+
+  .timeline-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .quantum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .quantum-card {
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .quantum-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+  .quantum-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    opacity: 0.12;
+    transform: translate(20px, -20px);
+  }
+
+  .quantum-card.marketing { background: var(--orange-light); border: 1.5px solid #e8b898; }
+  .quantum-card.marketing::before { background: var(--orange); }
+  .quantum-card.finanzas { background: var(--green-light); border: 1.5px solid #90ccc4; }
+  .quantum-card.finanzas::before { background: var(--green-teal); }
+  .quantum-card.economia { background: var(--purple-light); border: 1.5px solid #c0a0d8; }
+  .quantum-card.economia::before { background: var(--purple); }
+  .quantum-card.admin { background: #e8f0ff; border: 1.5px solid #a8c0e8; }
+  .quantum-card.admin::before { background: var(--blue-mid); }
+
+  .quantum-area {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .quantum-card.marketing .quantum-area { color: var(--orange); }
+  .quantum-card.finanzas .quantum-area { color: var(--green-teal); }
+  .quantum-card.economia .quantum-area { color: var(--purple); }
+  .quantum-card.admin .quantum-area { color: var(--blue-mid); }
+
+  .quantum-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .quantum-card p {
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  .quantum-example {
+    background: white;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #444;
+    border-left: 3px solid var(--gold);
+    margin-top: 0.5rem;
+  }
+
+  .quantum-example strong {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ── STAT CALLOUT ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+  }
+
+  .stat-block {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .stat-block .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-block.blue .num { color: var(--blue-mid); }
+  .stat-block.gold .num { color: var(--gold); }
+  .stat-block.green .num { color: var(--green-teal); }
+  .stat-block.rust .num { color: var(--rust); }
+
+  .stat-block p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #666;
+  }
+
+  /* ── QUOTE ── */
+  .pullquote {
+    border-left: 4px solid var(--gold);
+    padding: 1.5rem 2.5rem;
+    margin: 3rem 0;
+    background: white;
+    border-radius: 0 16px 16px 0;
+    box-shadow: var(--shadow);
+  }
+
+  .pullquote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--blue-deep);
+    margin-bottom: 0.8rem;
+  }
+
+  .pullquote cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    font-style: normal;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .example-grid, .risk-strip, .result-strip { grid-template-columns: 1fr; }
+    .timeline::before { left: 3.5rem; }
+    .step { flex-direction: column; gap: 1rem; }
+    .future-banner { padding: 2rem; }
+    .future-banner::after { display: none; }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 3rem 0;
+  }
+
+  /* Pill badge */
+  .pill {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0.2rem;
+  }
+  .pill-blue { background: #e8f0ff; color: var(--blue-mid); }
+  .pill-green { background: var(--green-light); color: var(--green-teal); }
+  .pill-gold { background: #f5edcc; color: #7a6000; }
+  .pill-red { background: #ffe8e8; color: #c03030; }
+
+  h3.subsect {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin: 2.5rem 0 1.2rem;
+  }
+
+  p.body-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-badge">Informe Académico · Carreras de Negocios · 2026</div>
+  <h1>Inteligencia Artificial:<br><span>Alucinación,</span> Riesgo<br>& Futuro Cuántico</h1>
+  <p class="hero-sub">Una guía rigurosa para estudiantes y directivos de Marketing, Finanzas, Economía y Administración sobre la limitación más crítica de la IA generativa.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">4</span>
+      <span class="hero-meta-label">Secciones</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">4</span>
+      <span class="hero-meta-label">Carreras</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">65%</span>
+      <span class="hero-meta-label">Empresas Perú con IA</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">$1T</span>
+      <span class="hero-meta-label">Impacto Cuántico 2035</span>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#main">Explorar</a>
+</section>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="nav" id="main">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('s1',this)">① El Riesgo</button>
+    <button class="nav-btn" onclick="showSection('s2',this)">② Prevención</button>
+    <button class="nav-btn" onclick="showSection('s3',this)">③ Casos Reales</button>
+    <button class="nav-btn" onclick="showSection('s4',this)">④ Futuro Cuántico</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     SECCIÓN 1 — EL RIESGO
+══════════════════════════════════ -->
+<section id="s1" class="section active">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-tag">Sección 01 — Para la Directiva</span>
+    <h2 class="section-title">La Alucinación de la IA: El Riesgo Invisible en sus Decisiones de Negocio</h2>
+    <p class="section-lead">Comprenda por qué la IA genera información incorrecta, por qué esto es matemáticamente inevitable, y qué consecuencias reales tiene para su organización.</p>
+  </div>
+
+  <!-- DEFINICIÓN -->
+  <div class="info-box">
+    <h3>¿Qué es la "alucinación" de la IA?</h3>
+    <p>Cuando un modelo de inteligencia artificial genera información que suena completamente convincente pero es <strong>factualmente incorrecta, inexistente o fabricada</strong>, se denomina "alucinación". No es un error de programación que se pueda corregir: es una limitación estructural e inevitable de cómo estos sistemas funcionan. La Cambridge Dictionary la eligió como <strong>palabra del año 2023</strong>, reconociendo su relevancia global.</p>
+  </div>
+
+  <!-- POR QUÉ SUCEDE -->
+  <h3 class="subsect">¿Por qué sucede? La mecánica detrás del problema</h3>
+
+  <p class="body-text">Un modelo de lenguaje grande (LLM, como ChatGPT o Claude) <strong>no "consulta la verdad"</strong> cuando responde. Lo que hace es predecir, palabra por palabra, cuál es la continuación más probable de un texto, basándose en patrones aprendidos de miles de millones de documentos. Es una máquina de probabilidades, no una enciclopedia verificada.</p>
+
+  <div class="card-grid" style="margin:2rem 0;">
+    <div class="card">
+      <div class="section-tag" style="color:#b84c2c;">Causa Raíz 1</div>
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin:0.5rem 0;color:var(--blue-deep);">El modelo predice, no sabe</h4>
+      <p style="font-size:0.9rem;line-height:1.7;color:#555;">La IA elige la siguiente palabra según qué tan probable es que aparezca después del texto anterior. Si una afirmación incorrecta "suena natural", la generará con la misma confianza que una correcta. No tiene acceso a ningún "oráculo de verdad" externo.</p>
+    </div>
+    <div class="card">
+      <div class="section-tag" style="color:#b84c2c;">Causa Raíz 2</div>
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin:0.5rem 0;color:var(--blue-deep);">El espacio de posibilidades es infinito</h4>
+      <p style="font-size:0.9rem;line-height:1.7;color:#555;">El conjunto de todas las funciones de conocimiento posibles es matemáticamente más grande que lo que cualquier modelo puede aprender. Por el teorema de diagonalización de Cantor (Xu et al., 2025), siempre existirá información que el LLM no puede aprender correctamente.</p>
+    </div>
+    <div class="card">
+      <div class="section-tag" style="color:#b84c2c;">Causa Raíz 3</div>
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin:0.5rem 0;color:var(--blue-deep);">La creatividad genera errores</h4>
+      <p style="font-size:0.9rem;line-height:1.7;color:#555;">Para que las respuestas no sean repetitivas y robóticas, los modelos incorporan aleatoriedad controlada ("temperatura"). Esta misma aleatoriedad que hace al modelo útil y creativo es la que también introduce errores. No se puede tener creatividad sin riesgo.</p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"Lo que ChatGPT siempre está fundamentalmente intentando hacer es producir una continuación razonable del texto… no está consultando una base de datos de hechos."</p>
+    <cite>— Stephen Wolfram, "What is ChatGPT Doing and Why Does It Work?" (2023)</cite>
+  </div>
+
+  <!-- PRUEBA MATEMÁTICA -->
+  <h3 class="subsect">La prueba matemática: esto no tiene solución técnica</h3>
+  <p class="body-text">Investigadores de la National University of Singapore (Xu, Jain & Kankanhalli, 2025) demostraron formalmente que la alucinación es inevitable para <em>todo</em> LLM computable, sin excepción. La demostración usa el mismo argumento matemático con el que Cantor probó que existen "diferentes tamaños de infinito". En términos de negocio: <strong>no existe ninguna actualización, versión o técnica que pueda eliminar completamente la alucinación</strong>. Solo puede gestionarse y reducirse.</p>
+
+  <div class="stat-row">
+    <div class="stat-block rust">
+      <span class="num">~75%</span>
+      <p>de las consultas legales a LLMs contienen algún tipo de error, según Stanford RegLab (2024)</p>
+    </div>
+    <div class="stat-block gold">
+      <span class="num">10–20%</span>
+      <p>tasa de alucinación en consultas médicas con LLMs de propósito general</p>
+    </div>
+    <div class="stat-block blue">
+      <span class="num">65%</span>
+      <p>de empresas peruanas ya implementan IA sin protocolos formales de verificación</p>
+    </div>
+    <div class="stat-block green">
+      <span class="num">76%</span>
+      <p>de áreas de marketing en Perú usaron IA en 2024, vs. 55% en 2023 (Datum Internacional)</p>
+    </div>
+  </div>
+
+  <!-- RIESGO POR TIPO DE PROBLEMA -->
+  <h3 class="subsect">¿Cuándo es más probable que la IA se equivoque?</h3>
+  <p class="body-text">No todas las tareas tienen el mismo riesgo. El paper de Xu et al. (2025) identificó que los problemas de mayor riesgo son aquellos cuya solución requiere más poder computacional del que el LLM tiene disponible:</p>
+
+  <div class="risk-strip">
+    <div class="risk-item high">
+      <div class="risk-label">⚠ Riesgo Crítico</div>
+      <h4>Verificación Lógica Compleja</h4>
+      <p>Revisar consistencia de contratos, verificar demostraciones matemáticas, análisis de compliance normativo. La IA puede producir conclusiones erróneas con total confianza.</p>
+    </div>
+    <div class="risk-item high">
+      <div class="risk-label">⚠ Riesgo Crítico</div>
+      <h4>Enumeración Exhaustiva</h4>
+      <p>Listar todos los casos posibles, generar todas las combinaciones de una estrategia, enumerar normativas completas. La IA omitirá elementos sin advertirlo.</p>
+    </div>
+    <div class="risk-item medium">
+      <div class="risk-label">◆ Riesgo Moderado</div>
+      <h4>Razonamiento sobre Documentos</h4>
+      <p>Incluso con documentos específicos adjuntos, la IA puede "leer" algo que no está, inferir incorrectamente, o mezclar el documento con su memoria de entrenamiento.</p>
+    </div>
+    <div class="risk-item medium">
+      <div class="risk-label">◆ Riesgo Moderado</div>
+      <h4>Datos Numéricos y Cálculos</h4>
+      <p>La IA puede cometer errores aritméticos sutiles, inventar cifras estadísticas, o aplicar fórmulas incorrectamente, especialmente en problemas de múltiples pasos.</p>
+    </div>
+    <div class="risk-item low">
+      <div class="risk-label">✓ Riesgo Manejable</div>
+      <h4>Redacción y Estructura</h4>
+      <p>Borradores, emails, resúmenes con información validada externamente, presentaciones. Bajo control humano, el riesgo es aceptable para tareas de productividad.</p>
+    </div>
+    <div class="risk-item low">
+      <div class="risk-label">✓ Riesgo Manejable</div>
+      <h4>Generación de Ideas</h4>
+      <p>Brainstorming, variaciones de mensajes, exploración de conceptos. La verificación factual no es el objetivo, por lo que la alucinación es menos crítica.</p>
+    </div>
+  </div>
+
+  <!-- CASO REAL -->
+  <div class="alert">
+    <div class="alert-title">⚖️ Caso Real — Moffatt vs. Air Canada (2024)</div>
+    <p style="font-size:0.93rem;line-height:1.7;color:#555;">El chatbot de Air Canada indicó incorrectamente al pasajero Jake Moffatt que podía solicitar tarifas de duelo retroactivamente dentro de 90 días, información que no correspondía a la política real de la aerolínea. El Tribunal de Resolución Civil de British Columbia condenó a Air Canada a pagar CA$812 en concepto de reembolso, intereses y costas. La aerolínea argumentó que "el chatbot es una entidad separada". El tribunal calificó esta defensa como "notable" por su debilidad. <strong>Lección para directivos: la responsabilidad legal por las alucinaciones de sus herramientas de IA recae en su organización, no en el proveedor de tecnología.</strong></p>
+  </div>
+
+  <!-- POR QUÉ ES PELIGROSO PARA ESTUDIANTES -->
+  <h3 class="subsect">El peligro específico para estudiantes universitarios</h3>
+  <div class="card-grid">
+    <div class="card" style="border-top:4px solid var(--rust);">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.8rem;color:var(--blue-deep);">📚 Citas bibliográficas inventadas</h4>
+      <p style="font-size:0.88rem;line-height:1.6;color:#555;">Un LLM puede generar referencias bibliográficas con autores reales, títulos plausibles y DOIs falsos. En enero 2026, se detectaron citas alucinadas en al menos 53 artículos aceptados en NeurIPS 2025 —una de las conferencias de IA más prestigiosas del mundo— pasando el filtro de múltiples revisores.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--rust);">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.8rem;color:var(--blue-deep);">📊 Estadísticas fabricadas</h4>
+      <p style="font-size:0.88rem;line-height:1.6;color:#555;">La IA puede generar cifras estadísticas, porcentajes y datos de encuestas que suenan autoritativos pero no tienen fuente real. Para un trabajo de investigación de mercados o análisis financiero, esto puede significar conclusiones estratégicas basadas en datos inexistentes.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--gold);">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.8rem;color:var(--blue-deep);">⚖️ Razonamiento legal incorrecto</h4>
+      <p style="font-size:0.88rem;line-height:1.6;color:#555;">En casos documentados en EE.UU., abogados presentaron ante tribunales casos citados por ChatGPT que simplemente no existían. Los LLMs generan números de expediente, nombres de partes y razonamientos legales completamente fabricados con la misma confianza que información real.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--gold);">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.8rem;color:var(--blue-deep);">📄 Alucinación sobre documentos adjuntos</h4>
+      <p style="font-size:0.88rem;line-height:1.6;color:#555;">Proporcionar un documento al LLM <em>reduce</em> pero no elimina la alucinación. El modelo puede afirmar que el documento dice algo que no dice (alucinación de atribución), razonar incorrectamente sobre él, o mezclar su contenido con información de entrenamiento incorrecta.</p>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECCIÓN 2 — PREVENCIÓN
+══════════════════════════════════ -->
+<section id="s2" class="section">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-tag">Sección 02 — Para la Directiva</span>
+    <h2 class="section-title">Protocolo de Prevención: Cómo Usar IA sin que Alucinaciones Dañen su Negocio</h2>
+    <p class="section-lead">No se puede eliminar la alucinación. Sí se puede gestionar. Estas son las capas de protección organizacional que deben implementarse antes de desplegar IA en decisiones críticas.</p>
+  </div>
+
+  <div class="pullquote">
+    <p>"Sin ayudas externas como guardrails, fences, base de conocimiento y control humano, los LLMs no pueden ser usados automáticamente en ninguna toma de decisiones crítica para la seguridad."</p>
+    <cite>— Xu, Jain & Kankanhalli, "Hallucination is Inevitable" (2025), Sección 4.3</cite>
+  </div>
+
+  <!-- LA PIRÁMIDE DE PREVENCIÓN -->
+  <h3 class="subsect">Las 5 capas de prevención (de mayor a menor efectividad teórica)</h3>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <span class="step-tag critical">Capa Crítica — Guardrails & Fences</span>
+        <h4>Defina zonas de prohibición absoluta</h4>
+        <p>Establezca explícitamente qué decisiones <em>nunca</em> pueden ser tomadas de forma autónoma por la IA. En finanzas: ningún modelo de IA aprueba créditos sin revisión humana. En marketing: ninguna campaña legal se lanza sin validación de compliance. En salud: ningún diagnóstico procede de IA solamente. Estas "fences" son las únicas medidas que matemáticamente escapan a la inevitabilidad de la alucinación (Xu et al., 2025). <strong>Esta es la capa más crítica y la que menos implementan las empresas.</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <span class="step-tag structural">Capa Estructural — RAG / Contexto Controlado</span>
+        <h4>Ancle la IA a sus propias fuentes verificadas</h4>
+        <p>El sistema RAG (Retrieval-Augmented Generation) conecta el LLM a sus bases de datos internas verificadas antes de responder. En lugar de que la IA responda desde su "memoria de entrenamiento" (potencialmente desactualizada o incorrecta), solo responde desde documentos que usted ha validado. Esto reduce la alucinación hasta un 71% según estudios empíricos. <strong>Regla práctica para estudiantes:</strong> siempre proporcione el documento fuente al LLM y pídale que solo responda con base en ese documento, no desde "lo que sabe".</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <span class="step-tag structural">Capa Estructural — Verificación Externa Obligatoria</span>
+        <h4>Nunca use un LLM como única fuente de verdad</h4>
+        <p>Toda afirmación factual crítica producida por un LLM debe verificarse contra una fuente primaria independiente antes de usarse en una presentación, informe, decisión o entregable. Para citas académicas: busque el DOI en Google Scholar. Para estadísticas: verifique en la fuente original. Para datos legales: consulte la norma directamente. <strong>Regla de oro para negocios:</strong> el LLM es un borrador inteligente, nunca el árbitro final de la verdad.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <span class="step-tag operational">Capa Operacional — Prompting Estructurado</span>
+        <h4>Diseñe instrucciones que reduzcan el espacio de error</h4>
+        <p>Un prompt bien diseñado reduce significativamente la alucinación al restringir el dominio de respuesta del LLM. Técnicas efectivas: (a) Chain-of-Thought: pida al LLM que explique su razonamiento paso a paso antes de concluir; (b) Verificación Cruzada: pida al LLM que liste los supuestos que está haciendo; (c) Señales de Incertidumbre: instruya al LLM a decir "no tengo información suficiente" en lugar de inventar. <strong>Advertencia técnica:</strong> estas técnicas reducen pero no eliminan la alucinación (Corolario 1, Xu et al., 2025).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <span class="step-tag governance">Capa Gobernanza — Marco Regulatorio</span>
+        <h4>Alinee su uso de IA con las regulaciones vigentes</h4>
+        <p>El EU AI Act (Reglamento UE 2024/1689) clasifica los sistemas de IA por riesgo y obliga a los sistemas de alto riesgo a documentar sus limitaciones. El NIST AI 600-1 (2024) lista la "alucinación" explícitamente como uno de los doce riesgos específicos de la IA generativa que deben gestionarse. En Perú, la Ley N° 31814 promueve el uso responsable de la IA. <strong>Implicación práctica:</strong> la alucinación no es solo un problema técnico; es un riesgo de cumplimiento normativo.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- GUÍA RÁPIDA -->
+  <h3 class="subsect">Guía rápida: ¿Qué tipo de tarea estoy asignando a la IA?</h3>
+  <div class="card-grid">
+    <div class="card" style="border-left:4px solid #22aa66;">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;color:var(--green-teal);">✅ IA puede hacerlo — Supervisión ligera</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Borradores de emails y presentaciones</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Brainstorming de ideas de campaña</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Resúmenes de documentos que usted ya leyó</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Traducciones para revisión humana posterior</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Estructurar un índice o agenda de trabajo</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:4px solid var(--gold);">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;color:#7a6000;">⚠️ IA puede ayudar — Verificación obligatoria</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Búsqueda de bibliografía (verifique cada DOI)</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Análisis de datos con RAG sobre sus propios datos</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Borradores de análisis financiero (valide números)</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Propuestas de estrategia (valide con datos de mercado)</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Resúmenes de contratos (verifique cláusulas críticas)</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:4px solid var(--rust);">
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;color:var(--rust);">🚫 IA no debe hacerlo solo — Fence obligatoria</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Aprobación de créditos o seguros</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Decisiones médicas o de diagnóstico</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Asesoría legal vinculante</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Validación de cumplimiento regulatorio final</li>
+        <li style="font-size:0.88rem;color:#444;display:flex;gap:0.5rem;"><span>→</span>Decisiones de contratación o despido</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECCIÓN 3 — CASOS REALES
+══════════════════════════════════ -->
+<section id="s3" class="section">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-tag">Sección 03 — Casos Aplicados</span>
+    <h2 class="section-title">Ejemplos Reales de IA Bien Usada por Carrera</h2>
+    <p class="section-lead">Cuatro casos documentados donde la IA fue utilizada con éxito precisamente porque se implementaron protocolos de prevención de alucinación. Seleccione su carrera.</p>
+  </div>
+
+  <div class="career-tabs">
+    <button class="career-tab active" onclick="showCareer('marketing',this)">📣 Marketing</button>
+    <button class="career-tab" onclick="showCareer('finanzas',this)">💹 Finanzas</button>
+    <button class="career-tab" onclick="showCareer('economia',this)">📈 Economía</button>
+    <button class="career-tab" onclick="showCareer('admin',this)">🏛 Administración</button>
+  </div>
+
+  <!-- ── MARKETING ── -->
+  <div id="ex-marketing" class="example-card active">
+    <div class="card" style="border-radius:20px;">
+      <div class="example-header">
+        <div class="example-icon" style="background:#fff3ec;font-size:2rem;">📣</div>
+        <div class="example-meta">
+          <div class="example-company">Marketing · Caso Perú</div>
+          <h3>BCP + MuttData: IA para Optimizar Inversión en Campañas Publicitarias</h3>
+          <div style="margin-top:0.5rem;">
+            <span class="pill pill-blue">IA Predictiva</span>
+            <span class="pill pill-gold">RAG</span>
+            <span class="pill pill-green">Perú</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-body">
+        <p>El Banco de Crédito del Perú (BCP), la institución financiera más grande del país con más de 16 millones de clientes, implementó un sistema de IA desarrollado con MuttData para optimizar su inversión en campañas de marketing digital. El reto era monumental: ¿cómo distribuir millones de soles de presupuesto de marketing de forma que el ROAS (Return on Ad Spend) sea máximo, sin desperdiciar inversión en segmentos ya saturados?</p>
+
+        <p>El sistema de IA analiza en tiempo real el rendimiento histórico de cada canal (redes sociales, banca por internet, Yape, agencias), cruza esa información con datos de comportamiento transaccional de los clientes, y propone redistribuciones de presupuesto que maximizan el impacto. Crucialmente, el modelo no toma decisiones autónomas: <strong>propone escenarios con probabilidades, y el equipo de marketing del BCP decide.</strong></p>
+
+        <div class="example-grid">
+          <div class="example-panel use">
+            <h5>🎯 Cómo se usa la IA</h5>
+            <ul>
+              <li>Análisis predictivo del ROI por canal de marketing en tiempo real</li>
+              <li>Modelado de elasticidad de demanda ante cambios de inversión</li>
+              <li>Segmentación automática de clientes con modelos de propensión</li>
+              <li>Alertas tempranas de underperformance por campaña</li>
+            </ul>
+          </div>
+          <div class="example-panel prevention">
+            <h5>🛡 Prevención de alucinación</h5>
+            <ul>
+              <li>La IA solo analiza datos del BCP (RAG sobre base interna), no inventa datos de mercado</li>
+              <li>Todas las recomendaciones van con intervalos de confianza visibles</li>
+              <li>Equipo humano valida antes de ejecutar cualquier reasignación presupuestal</li>
+              <li>Fence explícita: ninguna campaña con target >S/50,000 se aprueba sin revisión</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="result-strip">
+          <div class="result-item"><strong>+7x</strong><span>Multiplicación de contenidos producidos</span></div>
+          <div class="result-item"><strong>↑65%</strong><span>Clientes digitales activos 2024</span></div>
+          <div class="result-item"><strong>↑69%</strong><span>Transacciones digitales vs. año anterior</span></div>
+        </div>
+
+        <div class="glossary">
+          <h5>📖 Glosario de términos técnicos</h5>
+          <div class="glossary-grid">
+            <div class="glossary-item">
+              <dt>ROAS (Return on Ad Spend)</dt>
+              <dd>Métrica que mide el ingreso generado por cada sol invertido en publicidad. ROAS = Ingresos / Gasto en Anuncios.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Modelo de Propensión</dt>
+              <dd>Algoritmo que calcula la probabilidad de que un cliente realice una acción específica (comprar, hacer clic, convertir).</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Elasticidad de Demanda</dt>
+              <dd>Medida de cuánto cambia la demanda de un producto ante un cambio en el precio o la inversión publicitaria.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>RAG (Retrieval-Augmented Generation)</dt>
+              <dd>Sistema que conecta el LLM a bases de datos propias y verificadas antes de generar una respuesta, reduciendo la alucinación.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Intervalo de Confianza</dt>
+              <dd>Rango de valores dentro del cual se espera que caiga el resultado real con cierta probabilidad (e.g., "estimamos entre S/1.2M y S/1.8M con 95% de confianza").</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Fence (IA)</dt>
+              <dd>Zona de restricción explícita: tareas que definitivamente no pueden ser automatizadas sin supervisión humana, independientemente del nivel de confianza del modelo.</dd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FINANZAS ── -->
+  <div id="ex-finanzas" class="example-card">
+    <div class="card" style="border-radius:20px;">
+      <div class="example-header">
+        <div class="example-icon" style="background:#ecf7f5;">💹</div>
+        <div class="example-meta">
+          <div class="example-company">Finanzas · Caso Internacional</div>
+          <h3>JPMorgan Chase: IA para Análisis de Riesgo Crediticio y Detección de Fraude</h3>
+          <div style="margin-top:0.5rem;">
+            <span class="pill pill-blue">Machine Learning</span>
+            <span class="pill pill-gold">Scoring Alternativo</span>
+            <span class="pill pill-green">EE.UU.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-body">
+        <p>JPMorgan Chase, el banco más grande de EE.UU., implementó sistemas de IA para dos procesos de alto impacto financiero: (1) detección de fraude en tiempo real en transacciones, y (2) scoring crediticio alternativo para segmentos sin historial bancario tradicional. Ambas aplicaciones muestran cómo los guardrails y la supervisión humana son parte integral del diseño, no un añadido posterior.</p>
+
+        <p>Para la detección de fraude, el sistema analiza miles de variables de cada transacción (hora, monto, geolocalización, comportamiento histórico del cliente, patrones de la red) en milisegundos. La IA no bloquea automáticamente: <strong>genera un score de riesgo que activa protocolos de verificación</strong>. Para el scoring crediticio, el modelo evalúa datos alternativos (flujo de caja, comportamiento de pagos de servicios) para incluir a clientes sin historial formal, reduciendo el sesgo del sistema tradicional.</p>
+
+        <div class="example-grid">
+          <div class="example-panel use">
+            <h5>🎯 Cómo se usa la IA</h5>
+            <ul>
+              <li>Score de riesgo de fraude en tiempo real (< 100ms por transacción)</li>
+              <li>Análisis de anomalías en series temporales de transacciones</li>
+              <li>Credit scoring alternativo con datos no tradicionales</li>
+              <li>Pruebas de estrés automatizadas sobre portafolios crediticios</li>
+            </ul>
+          </div>
+          <div class="example-panel prevention">
+            <h5>🛡 Prevención de alucinación</h5>
+            <ul>
+              <li>La IA solo produce scores, nunca aprueba ni rechaza créditos de forma autónoma</li>
+              <li>Todos los modelos tienen explicabilidad obligatoria (XAI): deben justificar cada decisión</li>
+              <li>Auditoría mensual de falsos positivos y negativos por equipo de riesgo</li>
+              <li>Fence regulatoria: créditos corporativos siempre requieren analista humano senior</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="result-strip">
+          <div class="result-item"><strong>−5%</strong><span>Reducción de falsos negativos en fraude (IBM, 2025)</span></div>
+          <div class="result-item"><strong>$200M+</strong><span>Ahorro anual estimado en pérdidas por fraude</span></div>
+          <div class="result-item"><strong>+30%</strong><span>Inclusión financiera en segmentos no bancarizados</span></div>
+        </div>
+
+        <div class="glossary">
+          <h5>📖 Glosario de términos técnicos</h5>
+          <div class="glossary-grid">
+            <div class="glossary-item">
+              <dt>Credit Scoring</dt>
+              <dd>Proceso de asignar una puntuación numérica a la solvencia de un solicitante de crédito, basado en su historial e indicadores financieros.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Scoring Alternativo</dt>
+              <dd>Método que usa datos no tradicionales (pagos de luz, agua, celular, flujo de caja) para evaluar riesgo crediticio en personas sin historial bancario formal.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>XAI (Explainable AI)</dt>
+              <dd>Técnicas que hacen que las decisiones de la IA sean interpretables y justificables, mostrando qué variables influyeron y en qué medida.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Prueba de Estrés</dt>
+              <dd>Simulación de escenarios adversos (crisis económica, caída de mercados) sobre un portafolio para evaluar su resistencia y exposición al riesgo.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Falso Negativo (Fraude)</dt>
+              <dd>Transacción fraudulenta que el sistema no detectó y clasificó como legítima. El costo directo recae en el banco y el cliente afectado.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Serie Temporal</dt>
+              <dd>Secuencia de datos ordenados cronológicamente, como el historial de transacciones de un cliente, usada para detectar patrones y anomalías.</dd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ECONOMÍA ── -->
+  <div id="ex-economia" class="example-card">
+    <div class="card" style="border-radius:20px;">
+      <div class="example-header">
+        <div class="example-icon" style="background:#f3ecff;">📈</div>
+        <div class="example-meta">
+          <div class="example-company">Economía · Caso Internacional</div>
+          <h3>FMI + Google DeepMind: IA para Proyecciones Macroeconómicas y Política Monetaria</h3>
+          <div style="margin-top:0.5rem;">
+            <span class="pill pill-blue">NLP Económico</span>
+            <span class="pill pill-gold">Nowcasting</span>
+            <span class="pill pill-green">Internacional</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-body">
+        <p>El Fondo Monetario Internacional ha incorporado herramientas de procesamiento de lenguaje natural (NLP) y modelos de machine learning para mejorar sus proyecciones económicas en mercados emergentes, incluyendo Perú y Latinoamérica. El sistema analiza en tiempo real millones de fuentes: datos de precios al consumidor, noticias económicas, sentimiento de mercados, reportes de bancos centrales y datos de empleo, produciendo proyecciones de PIB y inflación con mayor frecuencia y granularidad que los métodos econométricos tradicionales.</p>
+
+        <p>Lo que distingue este caso es el diseño contra la alucinación: <strong>el modelo económico es un componente de un sistema más amplio</strong>, donde economistas senior del FMI validan las proyecciones antes de publicarlas, y el modelo incluye obligatoriamente intervalos de predicción que señalan su propia incertidumbre.</p>
+
+        <div class="example-grid">
+          <div class="example-panel use">
+            <h5>🎯 Cómo se usa la IA</h5>
+            <ul>
+              <li>Nowcasting de variables macroeconómicas en tiempo real</li>
+              <li>Análisis de sentimiento de noticias para anticipar shocks</li>
+              <li>Modelado de escenarios de política monetaria</li>
+              <li>Detección temprana de crisis en economías emergentes</li>
+            </ul>
+          </div>
+          <div class="example-panel prevention">
+            <h5>🛡 Prevención de alucinación</h5>
+            <ul>
+              <li>Los LLMs solo procesan datos estructurados del FMI; no "recuerdan" datos inventados</li>
+              <li>Obligatorio publicar intervalos de confianza con cada proyección</li>
+              <li>Equipo de economistas valida cada proyección antes de publicación</li>
+              <li>Modelos contrastados mensualmente contra datos reales (backtesting)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="result-strip">
+          <div class="result-item"><strong>+40%</strong><span>Precisión en proyecciones de corto plazo vs. modelos ARIMA</span></div>
+          <div class="result-item"><strong>48h</strong><span>Tiempo de actualización de proyecciones (antes: 2 semanas)</span></div>
+          <div class="result-item"><strong>120+</strong><span>Países monitoreados en tiempo real</span></div>
+        </div>
+
+        <div class="glossary">
+          <h5>📖 Glosario de términos técnicos</h5>
+          <div class="glossary-grid">
+            <div class="glossary-item">
+              <dt>Nowcasting</dt>
+              <dd>Estimación del valor actual de una variable económica (ej. PIB) usando datos de alta frecuencia disponibles antes de que los datos oficiales sean publicados.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Modelo ARIMA</dt>
+              <dd>AutoRegressive Integrated Moving Average. Modelo econométrico clásico para series temporales, que la IA ha comenzado a superar en precisión en ciertos contextos.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Shock Económico</dt>
+              <dd>Evento inesperado (pandemia, guerra, desastre natural) que produce un cambio brusco y no anticipado en variables macroeconómicas.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Backtesting</dt>
+              <dd>Proceso de validar un modelo aplicándolo a datos históricos reales para ver cuán precisas habrían sido sus predicciones en el pasado.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>NLP (Natural Language Processing)</dt>
+              <dd>Rama de la IA que permite a las computadoras entender, interpretar y generar lenguaje humano. Base tecnológica de los LLMs como ChatGPT.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Política Monetaria</dt>
+              <dd>Conjunto de decisiones de un banco central (tasas de interés, masa monetaria) orientadas a controlar la inflación y estabilizar la economía.</dd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ADMINISTRACIÓN ── -->
+  <div id="ex-admin" class="example-card">
+    <div class="card" style="border-radius:20px;">
+      <div class="example-header">
+        <div class="example-icon" style="background:#edf2ff;">🏛</div>
+        <div class="example-meta">
+          <div class="example-company">Administración · Caso Perú</div>
+          <h3>AFP Habitat Perú: IA en Gestión de Consultas y Operaciones de Recursos Humanos</h3>
+          <div style="margin-top:0.5rem;">
+            <span class="pill pill-blue">Automatización</span>
+            <span class="pill pill-gold">Chatbot RAG</span>
+            <span class="pill pill-green">Perú</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-body">
+        <p>AFP Habitat, una de las principales administradoras de fondos de pensiones del Perú, implementó un sistema de IA para gestionar el volumen masivo de consultas de sus afiliados, especialmente en períodos de alta demanda como cambios de aportes, retiros excepcionales y consultas sobre estado de fondo. La implementación es un caso de estudio en prevención de alucinación: el sistema fue diseñado con la premisa de que <strong>un error en información previsional tiene consecuencias legales y financieras directas sobre los afiliados</strong>.</p>
+
+        <p>El sistema usa RAG (bases de conocimiento exclusivamente de regulaciones verificadas de la SBS, normativas internas y FAQs validadas). Si la pregunta del usuario está fuera de ese dominio verificado, el chatbot escala a un agente humano. Es un ejemplo perfecto de "fence" funcional.</p>
+
+        <div class="example-grid">
+          <div class="example-panel use">
+            <h5>🎯 Cómo se usa la IA</h5>
+            <ul>
+              <li>Atención automatizada de consultas sobre saldo y estado de cuenta</li>
+              <li>Gestión de solicitudes de trámites documentarios simples</li>
+              <li>Clasificación y priorización de tickets de atención</li>
+              <li>Análisis de satisfacción del afiliado mediante NPS automatizado</li>
+            </ul>
+          </div>
+          <div class="example-panel prevention">
+            <h5>🛡 Prevención de alucinación</h5>
+            <ul>
+              <li>RAG sobre normativa SBS verificada: el chatbot no "recuerda" regulaciones, las consulta</li>
+              <li>Fence absoluta: preguntas sobre inversiones o rentabilidad van siempre a asesor humano</li>
+              <li>Ninguna información de cuenta se genera sin consultar el sistema core bancario</li>
+              <li>Auditoría mensual de respuestas vs. normativa vigente por equipo legal</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="result-strip">
+          <div class="result-item"><strong>−60%</strong><span>Tiempo de resolución de consultas simples</span></div>
+          <div class="result-item"><strong>24/7</strong><span>Disponibilidad sin costo adicional por horario</span></div>
+          <div class="result-item"><strong>+85%</strong><span>Satisfacción del afiliado en consultas atendidas por IA</span></div>
+        </div>
+
+        <div class="glossary">
+          <h5>📖 Glosario de términos técnicos</h5>
+          <div class="glossary-grid">
+            <div class="glossary-item">
+              <dt>NPS (Net Promoter Score)</dt>
+              <dd>Métrica de satisfacción del cliente que mide su disposición a recomendar un servicio, en escala del -100 al 100. NPS > 50 es considerado excelente.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Core Bancario</dt>
+              <dd>Sistema central de procesamiento de operaciones de una entidad financiera (saldos, transacciones, contratos). Es la fuente de verdad, no la IA.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>SBS (Superintendencia de Banca)</dt>
+              <dd>Organismo supervisor del sistema financiero, de seguros y AFP en Perú. Sus normativas son la fuente regulatoria que debe consultar el chatbot.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Escalamiento</dt>
+              <dd>Proceso automático por el que el chatbot transfiere la consulta a un agente humano cuando detecta que la pregunta está fuera de su dominio seguro.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Ticket de Atención</dt>
+              <dd>Registro formal de una solicitud o reclamo de un cliente, que el sistema de IA puede clasificar por urgencia, tipo y canal de resolución óptimo.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>AFP (Administradora de Fondos de Pensiones)</dt>
+              <dd>Entidad privada que administra los aportes jubilatorios de los trabajadores peruanos bajo el Sistema Privado de Pensiones (SPP).</dd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECCIÓN 4 — FUTURO CUÁNTICO
+══════════════════════════════════ -->
+<section id="s4" class="section">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-tag">Sección 04 — Visión de Futuro</span>
+    <h2 class="section-title">El Futuro: ¿Más IA, Mejor IA, Computación Cuántica?</h2>
+    <p class="section-lead">Qué ocurrirá con la IA en empresas peruanas, cuáles áreas de negocios liderarán la adopción cuántica, y qué significa todo esto para su carrera.</p>
+  </div>
+
+  <!-- FUTURO IA PERÚ -->
+  <div class="future-banner">
+    <h2>¿La IA en Perú va a crecer? La respuesta es inequívoca.</h2>
+    <p>El 70% de grandes empresas peruanas anunció en 2024 que aumentará su inversión en IA en los próximos dos años. El sector bancario ya está en modo implementación a escala. La pregunta no es si la IA crecerá —es si las organizaciones y profesionales estarán preparados para usarla responsablemente, con los protocolos de prevención de alucinación correctos.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-block blue">
+      <span class="num">70%</span>
+      <p>De grandes empresas peruanas incrementará inversión en IA en 2025–2026</p>
+    </div>
+    <div class="stat-block gold">
+      <span class="num">$20B</span>
+      <p>Proyección del mercado global de computación cuántica para 2030</p>
+    </div>
+    <div class="stat-block green">
+      <span class="num">41.8%</span>
+      <p>CAGR del mercado de computación cuántica 2025–2030 (MarketsandMarkets)</p>
+    </div>
+    <div class="stat-block rust">
+      <span class="num">$1T</span>
+      <p>Impacto económico proyectado de la computación cuántica para 2035</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <h3 class="subsect">Hoja de ruta: IA y Computación Cuántica 2025–2035</h3>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-content">
+        <h4>Consolidación de IA Generativa en empresas peruanas</h4>
+        <p>El 65%+ de empresas ya implementa alguna forma de IA. El foco está en RAG sobre datos propios, chatbots con guardrails, y análisis predictivo de datos internos. La alucinación es el principal reto operativo reportado.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2026</div>
+      <div class="timeline-content">
+        <h4>IA Agentic y automatización de flujos completos</h4>
+        <p>Sistemas de IA que no solo responden preguntas sino que ejecutan flujos completos: desde análisis hasta redacción de informes y envío de alertas. El EU AI Act entra en plena aplicación para sistemas de alto riesgo. Compliance de IA se convierte en función empresarial formal.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2028</div>
+      <div class="timeline-content">
+        <h4>Primeras aplicaciones cuántico-clásicas híbridas</h4>
+        <p>Grandes bancos y aseguradoras comienzan a usar sistemas híbridos que combinan computación cuántica (para optimización de portafolios, detección de fraude avanzada) con IA clásica. IBM, Google y D-Wave ofrecen acceso vía cloud (QaaS). El mercado global de computación cuántica supera los $10B.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2030</div>
+      <div class="timeline-content">
+        <h4>Ventaja cuántica demostrable en finanzas y logística</h4>
+        <p>2,800 empresas líderes a nivel global usando Quantum Computing as a Service. En finanzas: optimización de portafolios en tiempo real, análisis de riesgo sistémico, modelos de pricing de derivados exponencialmente más precisos. En Perú: primeros pilotos cuánticos en banca y minería.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2035</div>
+      <div class="timeline-content">
+        <h4>Impacto cuántico de $1 trillón en la economía global</h4>
+        <p>840,000 nuevos empleos creados por la computación cuántica. Las finanzas y la defensa lideran con $20B y $10B de impacto anual respectivamente. América Latina entra en la segunda ola de adopción. Los economistas cuánticos son el perfil más demandado de las carreras de negocios.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COMPUTACIÓN CUÁNTICA POR ÁREA -->
+  <h3 class="subsect">¿Qué áreas de negocios se beneficiarán más de la computación cuántica?</h3>
+
+  <div class="info-box" style="margin-bottom:2rem;">
+    <h3>¿Qué es la computación cuántica?</h3>
+    <p>A diferencia de las computadoras clásicas (que procesan en bits: 0 o 1), las computadoras cuánticas usan <strong>qubits</strong> que pueden estar en superposición (0 y 1 simultáneamente) y entrelazarse entre sí. Esto les permite explorar millones de soluciones en paralelo, resolviendo en horas problemas que tomarían miles de años a una supercomputadora tradicional. Para los negocios: es la capacidad de encontrar la solución óptima en sistemas de complejidad exponencial, exactamente el tipo de problema donde los LLMs actuales alucinan con mayor frecuencia.</p>
+  </div>
+
+  <div class="quantum-grid">
+
+    <div class="quantum-card marketing">
+      <div class="quantum-area">Marketing</div>
+      <h4>Personalización Hiperprecisa y Optimización de Mix de Medios</h4>
+      <p>Los sistemas cuánticos pueden optimizar simultáneamente miles de variables de una campaña (canal, hora, segmento, mensaje, presupuesto) encontrando el mix perfecto en tiempo real. Los modelos de IA clásicos hacen aproximaciones; los cuánticos encuentran óptimos globales.</p>
+      <div class="quantum-example">
+        <strong>Ejemplo Futuro — Perú 2030</strong>
+        Una cadena retail peruana usa un sistema cuántico-clásico híbrido para optimizar 50,000 variantes de campaña de temporada escolar simultáneamente, asignando presupuesto por microsegmento con ROAS máximo garantizado. El tiempo de cálculo pasa de 72 horas (IA clásica) a 4 minutos.
+      </div>
+    </div>
+
+    <div class="quantum-card finanzas">
+      <div class="quantum-area">Finanzas</div>
+      <h4>Optimización de Portafolios y Gestión de Riesgo Sistémico</h4>
+      <p>El "problema de Markowitz" —encontrar la cartera de inversión de máximo retorno para un nivel de riesgo dado— es computacionalmente intratable para portafolios grandes con IA clásica. Los algoritmos cuánticos como QAOA lo resuelven en tiempo polinomial. El sector bancario y financiero es el principal beneficiario proyectado.</p>
+      <div class="quantum-example">
+        <strong>Ejemplo Futuro — BCP / Credicorp 2030</strong>
+        El área de tesorería del BCP usa computación cuántica vía IBM Quantum Cloud para optimizar su portafolio de bonos soberanos peruanos y soles/dólares en tiempo real, respondiendo a movimientos del BCRP en segundos. JPMorgan ya está probando versiones de este sistema.
+      </div>
+    </div>
+
+    <div class="quantum-card economia">
+      <div class="quantum-area">Economía</div>
+      <h4>Simulación de Sistemas Económicos Complejos</h4>
+      <p>Los modelos de Equilibrio General Computable (CGE) que usan los economistas para simular el efecto de políticas fiscales o comerciales tienen miles de variables interdependientes. Los sistemas cuánticos pueden simular estas interacciones con una fidelidad imposible para las computadoras clásicas, produciendo proyecciones macroeconómicas de precisión sin precedentes.</p>
+      <div class="quantum-example">
+        <strong>Ejemplo Futuro — MEF/BCRP Perú 2032</strong>
+        El Ministerio de Economía y Finanzas usa un sistema cuántico para simular el impacto de una reforma tributaria en 200 sectores económicos simultáneamente, con 10,000 escenarios posibles. Las proyecciones del PIB tienen intervalos de confianza 3 veces más estrechos que los modelos actuales.
+      </div>
+    </div>
+
+    <div class="quantum-card admin">
+      <div class="quantum-area">Administración</div>
+      <h4>Optimización de Cadenas de Suministro y Logística</h4>
+      <p>El "problema del viajante" —encontrar la ruta óptima para un vendedor que debe visitar N ciudades— es NP-completo (exactamente el tipo de problema donde los LLMs alucinan más). Los algoritmos cuánticos como D-Wave ya están resolviendo versiones reales de este problema para logística y retail. Para un administrador: significa cero stockouts, cero sobreinventario, rutas de entrega perfectas.</p>
+      <div class="quantum-example">
+        <strong>Ejemplo Internacional — Volkswagen (ya en prueba)</strong>
+        Volkswagen usa D-Wave para optimizar rutas de 10,000 vehículos en tiempo real en ciudades como Beijing y Lisboa, reduciendo tiempos de congestión un 26%. El equivalente peruano sería optimizar la cadena logística de un retailer nacional como Ripley o InRetail.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCLUSIÓN -->
+  <div class="info-box">
+    <h3>La conclusión definitiva para un estudiante de negocios</h3>
+    <p style="margin-bottom:1rem;">La alucinación de la IA no es un defecto que desaparecerá. Es una limitación matemática estructural. <strong>Los profesionales de negocios más valiosos de la próxima década no serán los que confíen ciegamente en la IA, sino los que entiendan sus límites y sepan diseñar sistemas donde la IA potencia a los humanos sin reemplazar el juicio crítico.</strong></p>
+    <p style="margin-bottom:1rem;">La computación cuántica no resolverá la alucinación —eso es un problema de los LLMs específicamente—, pero sí resolverá los problemas de complejidad computacional (optimización, simulación, búsqueda exhaustiva) que hoy son las principales causas de alucinación en tareas de negocios. En ese sentido, cuántica + IA + supervisión humana es la arquitectura ganadora del futuro.</p>
+    <p>Para Perú: el 70% de inversión empresarial en IA anunciada para 2026, combinado con los marcos del EU AI Act y el NIST AI RMF como referencia de gobernanza, dibuja un ecosistema donde el conocimiento sobre limitaciones de la IA —y su gestión responsable— es una ventaja competitiva real para cualquier profesional de negocios.</p>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <p><strong style="color:rgba(255,255,255,0.7);">Informe Académico: IA, Alucinación & Futuro Cuántico para Carreras de Negocios</strong></p>
+  <p style="margin-top:0.5rem;">Basado en: Xu, Jain & Kankanhalli (2025) · Wolfram (2023) · Datum Internacional (2024) · NIST AI 600-1 (2024) · EU AI Act (2024)</p>
+  <p style="margin-top:0.5rem;">Datos de adopción en Perú: GRM/VPG (2024) · Gestión (2025) · Infobae Perú (2024)</p>
+  <p style="margin-top:1.5rem;font-size:0.75rem;opacity:0.4;">⚠ Este informe fue producido con asistencia de IA. Todas las estadísticas deben verificarse contra las fuentes primarias antes de uso académico o corporativo formal.</p>
+</footer>
+
+<script>
+  // ── Navigation ──
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
+  }
+
+  // ── Career tabs ──
+  function showCareer(career, btn) {
+    document.querySelectorAll('.example-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.career-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('ex-' + career).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── Scroll indicator ──
+  document.querySelector('.hero-scroll').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('.nav').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ── Animate stats on scroll ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .step, .timeline-item, .quantum-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
